@@ -1,22 +1,24 @@
 from web3 import Web3
 from eth_account import Account
-import bip44
-import secrets
+from mnemonic import Mnemonic
 
 # Connect to Ethereum mainnet node (replace with your mainnet provider URL)
 w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID'))
 
+# Initialize Mnemonic class
+mnemo = Mnemonic("english")
+
 wallets = []
 for _ in range(100):
-    # Generate a new mnemonic for each wallet
-    mnemonic = bip44.Wallet.new_random_wallet().mnemonic()
-    # Create a wallet from the mnemonic
-    wallet = bip44.Wallet(mnemonic)
-    # Derive the first account from the wallet
-    acct = wallet.derive_account("eth")
+    # Generate a new mnemonic
+    mnemonic = mnemo.generate(strength=128)
+    # Generate a seed from the mnemonic
+    seed = mnemo.to_seed(mnemonic)
+    # Create a wallet from the seed
+    wallet = Account.from_mnemonic(mnemonic)
     # Extract address and private key
-    address = acct.address()
-    private_key = acct.private_key()
+    address = wallet.address
+    private_key = wallet.privateKey
     # Append wallet details to the list
     wallets.append({
         "address": address,

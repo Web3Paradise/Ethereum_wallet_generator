@@ -1,8 +1,13 @@
 # Ethereum_wallet_generator
 A python script that generates 100 Ethereum wallets
 
-pip install eth-account
+Install Dependencies 
+
+"npm install ethers fs progress" 
+
+
+node withprogressbar.js 
 
 Run the script in your environment 
 
-You can edit the numbers in main.py to fit your needs 
+You can edit the numbers to fit your needs 

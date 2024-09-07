@@ -12,11 +12,10 @@ async function generateWallets() {
   });
 
   for (let i = 0; i < 100; i++) {
-    const wallet = new ethers.Wallet.createRandom();
+    const wallet = ethers.Wallet.createRandom();
     const address = wallet.address;
     const privateKey = wallet.privateKey;
     const mnemonic = wallet.mnemonic.phrase;
-
     wallets.push(`Address: ${address}\nPrivate Key: ${privateKey}\nMnemonic: ${mnemonic}\n\n`);
     progressBar.tick();
   }
@@ -26,4 +25,4 @@ async function generateWallets() {
   console.log(`\nWallets saved to ${outputFile}`);
 }
 
-generateWallets(); 
+generateWallets();
